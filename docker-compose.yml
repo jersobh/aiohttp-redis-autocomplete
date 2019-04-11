@@ -1,0 +1,31 @@
+version: "3.1"
+
+services:
+  web:
+    build: .
+    container_name: poc_web
+    volumes:
+      - ./src:/src
+    expose:
+      - "8000"
+    links:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: on-failure
+  redis:
+      image: redis
+      container_name: poc_redis
+  nginx:
+    image: nginx:latest
+    container_name: poc_nginx
+    depends_on:
+      - web
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d

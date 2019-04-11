@@ -1,0 +1,5 @@
+aiohttp
+gunicorn
+aioredis
+aiohttp_cache
+aiofiles

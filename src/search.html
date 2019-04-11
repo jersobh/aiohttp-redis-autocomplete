@@ -1,0 +1,22 @@
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+</head>
+
+  <label for="search">Search: </label>
+  <input id="search">
+
+<script>
+    $(function() {
+    $("#search").autocomplete({
+        source: function(request, response) {
+            $.get('/autocomplete', { search: request.term }, function(data) {
+                response(JSON.parse(data));
+            });
+        }
+    });
+
+        });
+</script>
