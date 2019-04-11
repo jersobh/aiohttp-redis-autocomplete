@@ -31,7 +31,7 @@ async def autocomplete(request):
             rangelen = 50
             if await r.exists('compl') == False:
                 print("Loading data into Redis DB\n")
-                setup(r)
+                await setup(r)
             else:
                 print("Dummy data already loaded \n")
 
